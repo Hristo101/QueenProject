@@ -69,6 +69,16 @@ bool hasValidMoves(char matrix[MAX_ROW][MAX_COL],int row,int col) {
     }
     return false;
 }
+void startNewGame(char matrix[MAX_ROW][MAX_COL],int newRow,int newCol) {
+
+    for (int i = 0; i < newRow; i++)
+    {
+        for (int j = 0; j < newCol; j++)
+        {
+            matrix[i][j] = '.';
+        }
+    }
+}
 void saveGame(char matrix[MAX_ROW][MAX_COL], int row, int col, int turnCounter, const char* filename) {
     std::ofstream file(filename);
 
@@ -129,6 +139,7 @@ int main()
     std::cout << "Enter the matrix size\n";
     int row;
     int col;
+    char matrix[MAX_ROW][MAX_COL] = {};
     cin >> row >> col;
     int turnCounter = 0;
     bool hasEmptySquare = true;
@@ -136,9 +147,23 @@ int main()
     while (true)
     {
         cin >> command;
-        if (areStringsEqual(command, "new"))
-        {
+        if (areStringsEqual(command, "new")) {
+            int r, c;
+            cin >> r >> c;
 
+            if (r > MAX_ROW || c > MAX_COL || r < 0 || c < 0) {
+                cout << "Size too big!" << endl;
+            }
+            else {
+                startNewGame(matrix, r, c);
+
+                row = r;
+                col = c;
+
+                turnCounter = 0;
+
+                cout << "New game started!" << endl;
+            }
         }
         else if (areStringsEqual(command, "play"))
         {
