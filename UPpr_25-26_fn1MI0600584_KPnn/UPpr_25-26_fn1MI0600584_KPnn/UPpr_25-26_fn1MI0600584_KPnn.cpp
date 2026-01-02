@@ -32,6 +32,19 @@ void printMatrix(char matrix[MAX_ROW][MAX_COL], int row, int col) {
         cout << endl;
     }
 }
+void printFreeCells(char matrix[MAX_ROW][MAX_COL], int row, int col) {
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (matrix[i][j] == '.')
+            {
+              cout << matrix[i][j] << " "; 
+              cout << endl;
+            }
+        }
+    }
+}
 bool hasValidMoves(char matrix[MAX_ROW][MAX_COL],int row,int col) {
     for (int i = 0; i < row; i++)
     {
