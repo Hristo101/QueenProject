@@ -32,6 +32,19 @@ void printMatrix(char matrix[MAX_ROW][MAX_COL], int row, int col) {
         cout << endl;
     }
 }
+bool hasValidMoves(char matrix[MAX_ROW][MAX_COL],int row,int col) {
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (matrix[i][j] == '.')
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 void makeMove(char matrix[MAX_ROW][MAX_COL],int queenRow,int queenCol, int row, int col) {
     int index = 0;
     int rowChange[] = { 1,-1,0,0,-1,-1,1,1 };
