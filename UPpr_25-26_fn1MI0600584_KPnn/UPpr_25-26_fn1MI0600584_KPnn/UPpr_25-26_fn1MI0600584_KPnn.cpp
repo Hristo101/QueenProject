@@ -79,6 +79,33 @@ void startNewGame(char matrix[MAX_ROW][MAX_COL],int newRow,int newCol) {
         }
     }
 }
+bool loadGame(char matrix[MAX_ROW][MAX_COL], int& row, int& col, int& turn, const char* filename) {
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        std::cout << "Error: Could not open file '" << filename << "'!" << std::endl;
+        std::cout << "Make sure the file exists and the name is correct." << std::endl;
+        return false; 
+    }
+
+    file >> row >> col >> turn;
+
+    if (row > MAX_ROW || col > MAX_COL) {
+        std::cout << "Error: Saved game is too big for this board!" << std::endl;
+        file.close();
+        return false;
+    }
+
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            file >> matrix[i][j];
+        }
+    }
+    file.close();
+}
+
 void saveGame(char matrix[MAX_ROW][MAX_COL], int row, int col, int turnCounter, const char* filename) {
     std::ofstream file(filename);
 
